@@ -38,17 +38,19 @@ function add(schema) {
     .then(ids => findById(ids[0]));
 }
 
-//
+// update(changes, id) functionality tested in Insomnia
 function update(changes, id) {
-  return db('schemes');
+  return db('schemes')
+    .where({ id })
+    .update(changes)
+    .then(count => findById(id));
 }
 
 // remove(id) functionality tested in Insomnia
 function remove(id) {
   return db('schemes')
     .where({ id })
-    .del()
-    .then(count => id);
+    .del();
 }
 
 //
